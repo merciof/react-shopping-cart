@@ -8,7 +8,6 @@ const Header = () => {
   return (
     <header>
       <Link to="/">Store</Link>
-      <Link to="/about">About</Link>
       <Link to="/cart"> Cart ({itemCount})</Link>
     </header>
   );
