@@ -17,24 +17,12 @@ function CartContextProvider({ children }) {
   const [state, dispatch] = useReducer(CartReducer, initialState);
 
   const contextValues = {
-    removeProduct: function removeProduct(payload) {
-      return dispatch({ type: "REMOVE_ITEM", payload });
-    },
-    addProduct: function addProduct(payload) {
-      return dispatch({ type: "ADD_ITEM", payload });
-    },
-    increase: function increase(payload) {
-      return dispatch({ type: "INCREASE", payload });
-    },
-    decrease: function decrease(payload) {
-      return dispatch({ type: "DECREASE", payload });
-    },
-    clearCart: function clearCart() {
-      return dispatch({ type: "CLEAR" });
-    },
-    handleCheckout: function handleCheckout() {
-      return dispatch({ type: "CHECKOUT" });
-    },
+    removeProduct: (payload) => dispatch({ type: "REMOVE_ITEM", payload }),
+    addProduct: (payload) => dispatch({ type: "ADD_ITEM", payload }),
+    increase: (payload) => dispatch({ type: "INCREASE", payload }),
+    decrease: (payload) => dispatch({ type: "DECREASE", payload }),
+    clearCart: () => dispatch({ type: "CLEAR" }),
+    handleCheckout: () => dispatch({ type: "CHECKOUT" }),
     ...state
   };
 

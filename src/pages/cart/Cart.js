@@ -15,6 +15,8 @@ function Cart() {
     handleCheckout
   } = useContext(CartContext);
 
+  debugger;
+
   return (
     <>
       <Header />
