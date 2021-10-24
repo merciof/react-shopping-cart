@@ -1,10 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Store from "../pages/store";
-import About from "../pages/About";
-import NotFound from "../pages/NotFound";
-import Cart from "../pages/cart";
+import Store from "../pages/store/Store";
+import Cart from "../pages/cart/Cart";
 
 const Routes = () => {
   return (
@@ -12,7 +10,7 @@ const Routes = () => {
       <Switch>
         <Route exact path="/" component={Store} />
         <Route path="/cart" component={Cart} />
-        <Route path="*" component={NotFound} />
+        {/* <Route path="*" component={NotFound} /> */}
       </Switch>
     </Router>
   );

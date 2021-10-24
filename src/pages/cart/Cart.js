@@ -1,33 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 import CartProducts from "./CartProducts";
-import Layout from "../../components/Layout";
-import { useCart } from "../../hooks/useCart";
-import { formatNumber } from "../../helpers/utils";
+import Header from "../../components/shared/header";
+import { CartContext } from "../../contexts/CartContextProvider";
 
 function Cart() {
   const {
     total,
-    cartItems,
+    cartItems = [],
     itemCount,
     clearCart,
     checkout,
     handleCheckout
-  } = useCart();
+  } = useContext(CartContext);
 
   return (
-    <Layout title="Cart" description="This is the Cart page">
-      <h1>Carrinho</h1>
+    <>
+      <Header />
+
       <p>Esta é a página do carrinho.</p>
 
       {cartItems.length > 0 ? <CartProducts /> : <div>Your cart is empty</div>}
 
       {checkout && (
-        <div>
+        <>
           <p>Checkout successfull</p>
           <Link to="/">BUY MORE</Link>
-        </div>
+        </>
       )}
 
       {cartItems.length > 0 && (
@@ -35,7 +35,7 @@ function Cart() {
           <p>Total Items</p>
           <h4>{itemCount}</h4>
           <p>Total Payment</p>
-          <h3>{formatNumber(total)}</h3>
+          <h3>{total}</h3>
 
           <hr />
 
@@ -47,7 +47,7 @@ function Cart() {
           </button>
         </>
       )}
-    </Layout>
+    </>
   );
 }
 

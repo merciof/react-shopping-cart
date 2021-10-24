@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../../contexts/CartContext";
+import { CartContext } from "../../contexts/CartContextProvider";
 
-const Header = () => {
+function Header() {
   const { itemCount } = useContext(CartContext);
 
   return (
@@ -11,6 +11,6 @@ const Header = () => {
       <Link to="/cart"> Cart ({itemCount})</Link>
     </header>
   );
-};
+}
 
 export default Header;
