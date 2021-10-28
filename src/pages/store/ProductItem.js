@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../contexts/CartContextProvider";
 
-import { formatNumber } from "../../helpers/utils";
-
 function ProductItem({ product }) {
   const { addProduct, cartItems, increase } = useContext(CartContext);
 
@@ -13,11 +11,11 @@ function ProductItem({ product }) {
   return (
     <>
       <p>{product.name}</p>
-      <h3>{formatNumber(product.price)}</h3>
+      <h3>{product.price}</h3>
 
-      {isInCart(product) && (
+      {/* {isInCart(product) && (
         <button onClick={() => increase(product)}>Add more</button>
-      )}
+      )} */}
 
       {!isInCart(product) && (
         <button onClick={() => addProduct(product)}>Add to cart</button>

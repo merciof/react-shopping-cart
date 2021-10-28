@@ -1,12 +1,12 @@
-const Storage = (cartItems) => {
+function storage(cartItems) {
   localStorage.setItem(
     "cart",
     JSON.stringify(cartItems.length > 0 ? cartItems : [])
   );
-};
+}
 
 export function sumItems(cartItems) {
-  Storage(cartItems);
+  storage(cartItems);
   let itemCount = cartItems.reduce(
     (total, product) => total + product.quantity,
     0
@@ -17,42 +17,46 @@ export function sumItems(cartItems) {
   return { itemCount, total };
 }
 
+let newCartItens = new Array();
+
 export function CartReducer(state, action) {
   switch (action.type) {
     case "ADD_ITEM":
-      if (!state.cartItems.find((item) => item.id === action.payload.id)) {
-        state.cartItems.push({
-          ...action.payload,
-          quantity: 1
-        });
-      }
+      newCartItens = new Array(...state.cartItems);
+      newCartItens.push({
+        ...action.payload,
+        quantity: 1
+      });
       return {
         ...state,
-        ...sumItems(state.cartItems),
-        cartItems: [...state.cartItems]
+        cartItens: newCartItens,
+        ...sumItems(newCartItens.cartItems)
       };
 
-    case "REMOVE_ITEM":
-      return {
-        ...state,
-        ...sumItems(
-          state.cartItems.filter((item) => item.id !== action.payload.id)
-        ),
-        cartItems: [
-          ...state.cartItems.filter((item) => item.id !== action.payload.id)
-        ]
-      };
+    // case "REMOVE_ITEM":
+    //   return {
+    //     ...state,
+    //     ...sumItems(
+    //       state.cartItems.filter((item) => item.id !== action.payload.id)
+    //     ),
+    //     cartItems: [
+    //       ...state.cartItems.filter((item) => item.id !== action.payload.id)
+    //     ]
+    //   };
 
     case "INCREASE":
-      state.cartItems[
-        state.cartItems.findIndex((item) => item.id === action.payload.id)
+      debugger;
+      newCartItens = new Array(...state.cartItems);
+      newCartItens[
+        newCartItens.findIndex((item) => item.id === action.payload.id)
       ].quantity++;
       return {
         ...state,
-        ...sumItems(state.cartItems),
-        cartItems: [...state.cartItems]
+        cartItems: newCartItens,
+        ...sumItems(newCartItens)
       };
 
+    // editar o decrease da mesma forma que o increase
     case "DECREASE":
       state.cartItems[
         state.cartItems.findIndex((item) => item.id === action.payload.id)
@@ -63,18 +67,18 @@ export function CartReducer(state, action) {
         cartItems: [...state.cartItems]
       };
 
-    case "CHECKOUT":
-      return {
-        cartItems: [],
-        checkout: true,
-        ...sumItems([])
-      };
+    // case "CHECKOUT":
+    //   return {
+    //     cartItems: [],
+    //     checkout: true,
+    //     ...sumItems([])
+    //   };
 
-    case "CLEAR":
-      return {
-        cartItems: [],
-        ...sumItems([])
-      };
+    // case "CLEAR":
+    //   return {
+    //     cartItems: [],
+    //     ...sumItems([])
+    //   };
 
     default:
       return state;

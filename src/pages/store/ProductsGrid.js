@@ -5,13 +5,7 @@ import Header from "../../components/shared/header";
 import { ProductsContext } from "../../contexts/ProductsContextProvider";
 
 function ProductsGrid() {
-  //const { products } = useProducts();
-
   const { products } = useContext(ProductsContext);
-
-  const productos = useContext(ProductsContext);
-
-  debugger;
 
   return (
     <>
