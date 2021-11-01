@@ -58,13 +58,14 @@ export function CartReducer(state, action) {
 
     // editar o decrease da mesma forma que o increase
     case "DECREASE":
-      state.cartItems[
-        state.cartItems.findIndex((item) => item.id === action.payload.id)
-      ].quantity--;
+      newCartItens = new Array(...state.cartItems);
+      newCartItens[
+        newCartItens.findIndex((item) => item.id === action.payload.id)
+      ].quantity++;
       return {
         ...state,
-        ...sumItems(state.cartItems),
-        cartItems: [...state.cartItems]
+        cartItems: newCartItens,
+        ...sumItems(newCartItens)
       };
 
     // case "CHECKOUT":
